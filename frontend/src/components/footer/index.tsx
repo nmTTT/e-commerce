@@ -3,11 +3,15 @@ import Image from "next/image";
 import { IoCallOutline } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
 import { FaRegCopyright } from "react-icons/fa";
+import { CiFacebook } from "react-icons/ci";
+import { FaInstagram } from "react-icons/fa";
+import { FaTwitter } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
 
 function Footer() {
   return (
     <div className="bg-black py-16 px-48">
-      <div className="text-white m-auto container">
+      <div className="text-white m-auto container flex flex-col gap-[43px]">
         <div className="flex justify-between items-center">
           <Image
             src="/images/Vector.png"
@@ -33,12 +37,18 @@ function Footer() {
             </div>
           </div>
         </div>
-        <div></div>
-        <div>
-          <div>
-            <FaRegCopyright /> 2024 Ecommerce MN
+        <div className="border border-gray-700"></div>
+        <div className="flex justify-between">
+          <div className="flex items-center gap-2 ">
+            <FaRegCopyright className="text-sm" />
+            <p className="text-lg">2024 Ecommerce MN</p>
           </div>
-          <div></div>
+          <div className="flex gap-4 text-xl">
+            <CiFacebook />
+            <FaInstagram />
+            <FaTwitter />
+            <FaLinkedin />
+          </div>
         </div>
       </div>
     </div>
