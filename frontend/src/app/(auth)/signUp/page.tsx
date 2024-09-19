@@ -1,9 +1,13 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 import React from "react";
 
 function SignUp() {
+  const router = useRouter();
   return (
     <div className="bg-gray-200 py-20">
       <div className="container m-auto text-black flex flex-col gap-6 w-[21rem]">
@@ -32,8 +36,13 @@ function SignUp() {
             </div>
           </div>
           <div>
-            <Button className="bg-white border border-blue-600 hover:bg-blue-600 w-full text-black hover:text-white">
-              <Link href="/logIn">Нэвтрэх</Link>
+            <Button
+              onClick={() => {
+                router.push("/");
+              }}
+              className="bg-white border border-blue-600 hover:bg-blue-600 w-full text-black hover:text-white"
+            >
+              Нэвтрэх
             </Button>
           </div>
         </div>
