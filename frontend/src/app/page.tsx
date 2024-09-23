@@ -1,11 +1,11 @@
 "use client";
 
-import LogIn from "./(auth)/logIn/page";
+import MainHome from "./ec-home/page";
 
 export default function Home() {
   return (
     <div>
-      <LogIn />
+      <MainHome />
     </div>
   );
 }
