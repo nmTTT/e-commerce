@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import React from "react";
@@ -22,13 +21,19 @@ function LogIn() {
             <Button className="bg-blue-600 hover:bg-blue-800 text-white">
               Нэвтрэх
             </Button>
-            <Button variant="link" className="text-gray-500">
-              <Link href="/signUp">Нууц үг мартсан</Link>
+            <Button
+              variant="link"
+              className="text-gray-500"
+              onClick={() => {
+                router.push("/signUp");
+              }}
+            >
+              Нууц үг мартсан
             </Button>
           </div>
           <div>
             <Button
-              onChange={() => {
+              onClick={() => {
                 router.push("/signUp");
               }}
               className="bg-white border border-blue-600 hover:bg-blue-600 w-full text-black hover:text-white"
