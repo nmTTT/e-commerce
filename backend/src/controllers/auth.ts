@@ -6,9 +6,7 @@ import bcrypt from "bcrypt";
 const TOKENPASS = process.env.TOKENPASS || "";
 export const signUp = async (req: Request, res: Response) => {
   try {
-    console.log("body", req.body);
     const { lastname, firstname, email, password } = req.body;
-
     if (!lastname || !firstname || !email || !password) {
       res.status(400).json({ message: "Hooson utga baij bolohgui" });
     }
@@ -40,9 +38,11 @@ export const logIn = async (req: Request, res: Response) => {
           .status(400)
           .json({ message: "hereglegchiin email esvel nuuts ug buruu baina" });
       } else {
+        console.log("userid", user._id);
         const token = jwt.sign({ id: user._id }, TOKENPASS, {
           expiresIn: "1h",
         });
+
         res.status(200).json({ message: "success", token: token });
       }
     }

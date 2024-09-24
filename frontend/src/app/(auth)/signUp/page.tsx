@@ -32,13 +32,19 @@ function SignUp() {
       ...userData,
       [name]: value,
     });
+    console.log("userData", userData);
   };
   const handleSignUp = async () => {
     try {
       const { firstname, lastname, repassword, email, password } = userData;
       if (password === repassword) {
-        const newUser = { firstname, lastname, email, password };
-        const res = await axios.post(`${apiUrl}/signUp`, { newUser });
+        // console.log("newUser", newUser);
+        const res = await axios.post(`${apiUrl}/signUp`, {
+          firstname,
+          lastname,
+          email,
+          password,
+        });
         if (res.status === 201) {
           toast.success("succesfully created user");
           router.push("/logIn");
