@@ -6,12 +6,14 @@ import { apiUrl } from "@/lib/utils";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 interface IUser {
   email: string;
   password: string;
   repassword: string;
-  name: string;
+  firstname: string;
+  lastname: string;
 }
 
 function SignUp() {
@@ -20,7 +22,8 @@ function SignUp() {
     email: "",
     password: "",
     repassword: "",
-    name: "",
+    firstname: "",
+    lastname: "",
   });
 
   const handleUserData = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,20 +35,20 @@ function SignUp() {
   };
   const handleSignUp = async () => {
     try {
-      const { name, repassword, email, password } = userData;
+      const { firstname, lastname, repassword, email, password } = userData;
       if (password === repassword) {
-        const newUser = { name, email, password };
+        const newUser = { firstname, lastname, email, password };
         const res = await axios.post(`${apiUrl}/signUp`, { newUser });
         if (res.status === 201) {
-          const data = await res.data();
-          console.log("User created successfully:", data);
+          toast.success("succesfully created user");
           router.push("/logIn");
         }
       } else {
-        console.log("password wrong");
+        console.log("couldn't create user");
       }
     } catch (error) {
       console.log("error", error);
+      toast.error("Couldn't create user");
     }
   };
   return (
@@ -58,8 +61,14 @@ function SignUp() {
           <div className="flex flex-col gap-4">
             <Input
               className="bg-white rounded-2xl"
-              name="name"
+              name="firstname"
               placeholder="Нэр"
+              onChange={handleUserData}
+            />
+            <Input
+              className="bg-white rounded-2xl"
+              name="lastname"
+              placeholder="Овог"
               onChange={handleUserData}
             />
             <Input

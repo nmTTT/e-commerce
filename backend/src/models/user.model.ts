@@ -5,7 +5,7 @@ import { model, Schema } from "mongoose";
 interface iUser {
   _id: Schema.Types.ObjectId;
   firstname: string;
-  lastname: string;
+  lastname?: string;
   email: string;
   password: string;
   phoneNumber?: string;
