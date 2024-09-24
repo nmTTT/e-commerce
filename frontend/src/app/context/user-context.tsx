@@ -3,18 +3,23 @@
 import { apiUrl } from "@/lib/utils";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
 import { toast } from "react-toastify";
-import { createContext } from "vm";
 
-export const UserContext = createContext({
-  handleLogIn: () => {},
-  handleUserData: () => {},
-});
 interface IUser {
   email: string;
   password: string;
 }
+
+type UserContextType = {
+  handleLogIn: () => void;
+  handleUserData: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+export const UserContext = createContext<UserContextType>({
+  handleLogIn: () => {},
+  handleUserData: () => {},
+});
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
@@ -48,7 +53,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
   return (
-    <UserContext.Provider value={{ handleLogIn, handleUserData }}>
+    <UserContext.Provider value={{ handleUserData, handleLogIn }}>
       {children}
     </UserContext.Provider>
   );
