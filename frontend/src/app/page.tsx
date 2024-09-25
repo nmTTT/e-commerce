@@ -1,6 +1,6 @@
 "use client";
 
-import MainHome from "./ec-home/page";
+import MainHome from "./myHome/page";
 
 export default function Home() {
   return (

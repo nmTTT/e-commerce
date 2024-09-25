@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Header from "@/components/header/index";
-import Footer from "@/components/footer/index";
+import Header from "@/app/components/header/index";
+import Footer from "@/app/components/footer/index";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

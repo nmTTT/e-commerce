@@ -19,10 +19,10 @@ type UserContextType = {
 };
 
 export const UserContext = createContext<UserContextType>({
-  userToken: "",
-  setUserToken: () => {},
   handleLogIn: () => {},
   handleUserData: () => {},
+  userToken: "",
+  setUserToken: () => {},
 });
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
@@ -40,10 +40,9 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       ...userData,
       [name]: value,
     });
-    console.log("userdata");
+    console.log("userdata", userData);
   };
   const handleLogIn = async () => {
-    console.log("first");
     try {
       console.log("user", apiUrl);
       const res = await axios.post(`${apiUrl}/logIn`, userData);
