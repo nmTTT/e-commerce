@@ -1,5 +1,6 @@
-import { CategoryBigCard } from "@/components/categoryCard/categoryBigCard";
-import { CategoryCard } from "@/components/categoryCard/categoryCard";
+// import { CategoryBigCard } from "@/components/categoryCard/categoryBigCard";
+// import { CategoryMediumCard } from "@/components/categoryCard/categoryMediumCard";
+// import { CategorySmallCard } from "@/components/categoryCard/categorysmallCard";
 import React from "react";
 
 function MainHome() {
@@ -13,43 +14,13 @@ function MainHome() {
       </div>
       <div className="flex flex-col gap-12 w-3/4">
         <div className="grid grid-cols-4 gap-5">
-          {[].map((pr, idx) => {
+          {/* {[].map((pr, idx) => {
             if (idx === 3) {
               return <CategoryBigCard />;
             } else if (idx === 4) {
-              return <CategoryBigCard />;
-            }
-            return <CategoryCard />;
-          })}
-
-          <CategoryCard />
-          <CategoryCard />
-          <CategoryCard />
-        </div>
-        <div className="grid grid-cols-4 grid-rows-3 gap-5">
-          <CategoryCard />
-          <CategoryCard />
-
-          <CategoryBigCard />
-
-          <CategoryBigCard />
-
-          <div className="col-start-3 col-span-1 row-start-3 row-span-1">
-            <CategoryCard />
-          </div>
-          <div className="col-start-4 col-span-1 row-start-3 row-span-1">
-            <CategoryCard />
-          </div>
-        </div>
-        <div className="grid grid-cols-4">
-          <CategoryCard />
-          <CategoryCard />
-          <CategoryCard />
-          <CategoryCard />
-          <CategoryCard />
-          <CategoryCard />
-          <CategoryCard />
-          <CategoryCard />
+              return <CategoryMediumCard />;
+            } else return <CategorySmallCard />;
+          })} */}
         </div>
       </div>
     </div>

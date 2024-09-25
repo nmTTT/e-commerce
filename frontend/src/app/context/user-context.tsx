@@ -14,16 +14,20 @@ interface IUser {
 type UserContextType = {
   handleLogIn: () => void;
   handleUserData: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  userToken: string;
+  setUserToken: (userToken: string) => void;
 };
 
 export const UserContext = createContext<UserContextType>({
+  userToken: "",
+  setUserToken: () => {},
   handleLogIn: () => {},
   handleUserData: () => {},
 });
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
-  //   const [userToken, setUserToken] = useState(false);
+  const [userToken, setUserToken] = useState("");
   const [userData, setUserData] = useState<IUser>({
     email: "",
     password: "",
@@ -31,12 +35,15 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   const handleUserData = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    console.log("first", name, value);
     setUserData({
       ...userData,
       [name]: value,
     });
+    console.log("userdata");
   };
   const handleLogIn = async () => {
+    console.log("first");
     try {
       console.log("user", apiUrl);
       const res = await axios.post(`${apiUrl}/logIn`, userData);
@@ -53,7 +60,9 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
   return (
-    <UserContext.Provider value={{ handleUserData, handleLogIn }}>
+    <UserContext.Provider
+      value={{ handleUserData, handleLogIn, userToken, setUserToken }}
+    >
       {children}
     </UserContext.Provider>
   );
