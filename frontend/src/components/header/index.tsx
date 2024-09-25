@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext } from "react";
+import React from "react";
 import Image from "next/image";
 import { CiSearch } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
@@ -8,11 +8,11 @@ import { CiShoppingCart } from "react-icons/ci";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
-import { UserContext } from "@/app/context/user-context";
+// import { UserContext } from "@/app/context/user-context";
 
 function Header() {
   const router = useRouter();
-  const { token } = useContext(UserContext);
+  // const { token } = useContext(UserContext);
 
   return (
     <div className="bg-black py-4">

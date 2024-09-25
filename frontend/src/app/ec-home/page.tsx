@@ -13,7 +13,15 @@ function MainHome() {
       </div>
       <div className="flex flex-col gap-12 w-3/4">
         <div className="grid grid-cols-4 gap-5">
-          <CategoryCard />
+          {[].map((pr, idx) => {
+            if (idx === 3) {
+              return <CategoryBigCard />;
+            } else if (idx === 4) {
+              return <CategoryBigCard />;
+            }
+            return <CategoryCard />;
+          })}
+
           <CategoryCard />
           <CategoryCard />
           <CategoryCard />
@@ -21,12 +29,11 @@ function MainHome() {
         <div className="grid grid-cols-4 grid-rows-3 gap-5">
           <CategoryCard />
           <CategoryCard />
-          <div className="col-start-3 col-span-2 row-start-1 row-span-2">
-            <CategoryBigCard />
-          </div>
-          <div className="col-start-1 col-span-2 row-start-2 row-span-2">
-            <CategoryBigCard />
-          </div>
+
+          <CategoryBigCard />
+
+          <CategoryBigCard />
+
           <div className="col-start-3 col-span-1 row-start-3 row-span-1">
             <CategoryCard />
           </div>
