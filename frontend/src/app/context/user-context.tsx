@@ -34,6 +34,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   });
 
   const handleUserData = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("first");
     const { name, value } = e.target;
     console.log("first", name, value);
     setUserData({
@@ -43,6 +44,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     console.log("userdata", userData);
   };
   const handleLogIn = async () => {
+    console.log("first");
     try {
       console.log("user", apiUrl);
       const res = await axios.post(`${apiUrl}/logIn`, userData);

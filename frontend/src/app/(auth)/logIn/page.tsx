@@ -9,6 +9,7 @@ import React, { useContext } from "react";
 function LogIn() {
   const router = useRouter();
   const { handleLogIn, handleUserData } = useContext(UserContext);
+  console.log("first", handleLogIn, handleUserData);
   return (
     <div className="bg-gray-200 p-56">
       <div className="container m-auto text-black flex flex-col gap-6 w-[21rem]">

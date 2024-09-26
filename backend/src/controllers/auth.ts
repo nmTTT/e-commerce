@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import User from "../models/user.model";
 import bcrypt from "bcrypt";
-import { generateToken } from "../utils/codeToken";
+import { generateToken } from "../utils/jwt";
 
 const TOKENPASS = process.env.TOKENPASS || "";
 export const signUp = async (req: Request, res: Response) => {
@@ -46,5 +46,15 @@ export const logIn = async (req: Request, res: Response) => {
   } catch (error) {
     console.log(error);
     res.status(404).json({ message: "error", user: error });
+  }
+};
+
+export const getCurrentUser = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.user;
+    const findUser = await User.findById(id);
+    res.status(201).json({ message: "success", user: findUser });
+  } catch (error) {
+    res.status(400).json({ message: "Error" });
   }
 };
