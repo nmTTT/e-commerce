@@ -6,7 +6,7 @@ import { UserContext } from "@/app/context/user-context";
 import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
 
-function LogIn() {
+export default function LogIn() {
   const router = useRouter();
   const { handleLogIn, handleUserData } = useContext(UserContext);
   console.log("first", handleLogIn, handleUserData);
@@ -56,5 +56,3 @@ function LogIn() {
     </div>
   );
 }
-
-export default LogIn;
