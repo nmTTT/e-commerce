@@ -16,7 +16,7 @@ const VerifyOtp = ({
   countDown,
 }: IVerifyOtpType) => {
   return (
-    <div className="container m-auto flex flex-col gap-12 pt-[6.5rem]">
+    <div className="text-black flex flex-col items-center gap-12 pt-[6.5rem]">
       <div className="flex flex-col gap-6">
         <div>
           <HiOutlineMailOpen />

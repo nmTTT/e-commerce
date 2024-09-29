@@ -83,7 +83,7 @@ export const verifyOtp = async (req: Request, res: Response) => {
 
   await sendEmail(
     email,
-    `<a href="http://localhost:3000/forgetpass/newpass?resettoken="${resetToken}"">Нууц үг сэргээх холбоос</a>`
+    `<a href="http://localhost:3000/forgetPass/newPassword?resettoken="${resetToken}"">Нууц үг сэргээх холбоос</a>`
   );
   res.status(200).json({ message: "Нууц үг сэргээх имэйл илгээлээ" });
 };
@@ -98,12 +98,12 @@ export const forgetPass = async (req: Request, res: Response) => {
         .json({ message: "Бүртгэлтэй хэрэглэгч олдсонгүй" });
     }
 
-    const otp = Math.floor(Math.random() * 10_000)
+    const rndOtp = Math.floor(Math.random() * 10_000)
       .toString()
       .padStart(4, "0");
-    findUser.otp = otp;
+    findUser.otp = rndOtp;
     await findUser.save();
-    await sendEmail(email, otp);
+    await sendEmail(email, rndOtp);
     res.status(200).json({ message: "OTP code is sent email successfully" });
   } catch (error) {}
 };

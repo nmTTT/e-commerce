@@ -63,7 +63,7 @@ const EmailOtp = () => {
 
   return (
     <div className="h-[calc(100vh-350px)] flex flex-col items-center">
-      <div className="w-[320px] mt-24">
+      <div className="w-full h-full flex justify-center bg-gray-200 p-24">
         {step === 1 && (
           <>
             <SendEmail

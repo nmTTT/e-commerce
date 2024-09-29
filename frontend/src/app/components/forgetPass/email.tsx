@@ -1,4 +1,4 @@
-import { Button } from "react-day-picker";
+import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
 type ISendEmailType = {
@@ -8,8 +8,8 @@ type ISendEmailType = {
 
 function SendEmail({ handleEmail, handleSendOtp }: ISendEmailType) {
   return (
-    <div className="bg-gray-200 p-56">
-      <div className="container m-auto text-black flex flex-col gap-6 w-[21rem]">
+    <div className="bg-gray-200  h-full">
+      <div className="text-black flex flex-col gap-6 w-[21rem]">
         <div className="flex justify-center">
           <p className="text-4xl font-semibold">Нууц үг сэргээх</p>
         </div>
