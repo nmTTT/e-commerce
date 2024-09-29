@@ -16,19 +16,19 @@ const VerifyOtp = ({
   countDown,
 }: IVerifyOtpType) => {
   return (
-    <div className="text-black flex flex-col items-center gap-12 pt-[6.5rem]">
-      <div className="flex flex-col gap-6">
-        <div>
+    <div className="text-black flex flex-col gap-12 pt-[6.5rem]">
+      <div className="flex flex-col gap-6 items-center">
+        <div className="text-6xl">
           <HiOutlineMailOpen />
         </div>
-        <div className="flex flex-col gap-2">
-          <h2>Баталгаажуулах</h2>
+        <div className="flex flex-col items-center gap-2">
+          <h1 className="font-semibold text-3xl">Баталгаажуулах</h1>
           <p>
             “mujo@nest.edu.mn” хаягт илгээсэн баталгаажуулах кодыг оруулна уу
           </p>
         </div>
         <InputOTP maxLength={4} value={otpValue} onChange={handleConfirmOtp}>
-          <InputOTPGroup className="bg-white">
+          <InputOTPGroup className="bg-white ">
             <InputOTPSlot className="w-14 h-14" index={0} />
             <InputOTPSlot className="w-14 h-14" index={1} />
             <InputOTPSlot className="w-14 h-14" index={2} />

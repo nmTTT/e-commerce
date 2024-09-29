@@ -44,7 +44,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     console.log("userdata", userData);
   };
   const handleLogIn = async () => {
-    console.log("first");
     try {
       console.log("user", apiUrl);
       const res = await axios.post(`${apiUrl}/logIn`, userData);
@@ -53,6 +52,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         toast.success("User successfully signed in", { autoClose: 1500 });
         const { token } = res.data;
         localStorage.setItem("token", token);
+        setUserToken(token);
         router.push("/");
       }
     } catch (error) {

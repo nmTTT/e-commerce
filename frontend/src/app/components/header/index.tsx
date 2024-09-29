@@ -1,20 +1,32 @@
 "use client";
 
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import { CiSearch } from "react-icons/ci";
-import { CiHeart } from "react-icons/ci";
 import { CiShoppingCart } from "react-icons/ci";
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
 import { useRouter } from "next/navigation";
 import { UserContext } from "@/app/context/user-context";
-// import { UserContext } from "@/app/context/user-context";
+import { CiHeart } from "react-icons/ci";
+import { CiUser } from "react-icons/ci";
+import DropDownProfile from "./dropDownProfile";
 
 function Header() {
   const router = useRouter();
-  const { userToken } = useContext(UserContext);
+  const { userToken, setUserToken } = useContext(UserContext);
+  const [openProfile, setOpenProfile] = useState(false);
+  const logOut = () => {
+    localStorage.removeItem("token");
+    setUserToken("");
+    setOpenProfile(false);
+    router.push("/logIn");
+  };
 
+  useEffect(() => {
+    const token = localStorage.getItem("token") || "";
+    setUserToken(token);
+  }, []);
   return (
     <div className="bg-black py-4">
       <div className="m-auto container flex justify-between">
@@ -39,18 +51,21 @@ function Header() {
           />
         </div>
         <div className="text-white flex items-center">
+          <div>
+            <Button className="text-3xl bg-black">
+              <CiHeart />
+            </Button>
+          </div>
+          <div>
+            <Button className="text-3xl bg-black">
+              <CiShoppingCart />
+            </Button>
+          </div>
           {userToken ? (
-            <div>
-              <div>
-                <Button className="text-3xl bg-black">
-                  <CiHeart />
-                </Button>
-              </div>
-              <div>
-                <Button className="text-3xl bg-black">
-                  <CiShoppingCart />
-                </Button>
-              </div>
+            <div className="text-3xl bg-black relative">
+              <Button onClick={() => setOpenProfile((prev) => !prev)}>
+                <CiUser />
+              </Button>
             </div>
           ) : (
             <div className="flex gap-2 pl-4">
@@ -72,6 +87,7 @@ function Header() {
               </Button>
             </div>
           )}
+          {openProfile === true && <DropDownProfile logOut={logOut} />}
         </div>
       </div>
     </div>

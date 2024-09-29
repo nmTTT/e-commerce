@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 
 const EmailOtp = () => {
   const router = useRouter();
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(2);
   const [email, setEmail] = useState("");
   const [otpValue, setOtpValue] = useState("");
   const [countDown, setCountDown] = useState(30);
@@ -63,7 +63,7 @@ const EmailOtp = () => {
 
   return (
     <div className="h-[calc(100vh-350px)] flex flex-col items-center">
-      <div className="w-full h-full flex justify-center bg-gray-200 p-24">
+      <div className="w-full h-full flex justify-center bg-gray-200">
         {step === 1 && (
           <>
             <SendEmail
