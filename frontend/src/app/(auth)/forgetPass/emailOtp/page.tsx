@@ -5,14 +5,14 @@ import VerifyOtp from "@/app/components/forgetPass/otp";
 import { apiUrl } from "@/lib/utils";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const EmailOtp = () => {
   const router = useRouter();
   const [step, setStep] = useState(2);
   const [email, setEmail] = useState("");
-  const [otpValue, setOtpValue] = useState("");
+  const [otpValue, setOtpValue] = useState<string>("");
   const [countDown, setCountDown] = useState(30);
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +30,7 @@ const EmailOtp = () => {
   };
   const handleConfirmOtp = async (value: string) => {
     setOtpValue(value);
-    console.log(otpValue);
+    console.log(value, otpValue);
     if (value.length === 4) {
       try {
         const res = await axios.post(`${apiUrl}/verify-otp`, {
@@ -48,6 +48,7 @@ const EmailOtp = () => {
       }
     }
   };
+
   const handleResendOtp = async () => {
     setCountDown(30);
     try {
@@ -84,6 +85,7 @@ const EmailOtp = () => {
         {step === 2 && (
           <>
             <VerifyOtp
+              email={email}
               otpValue={otpValue}
               handleConfirmOtp={handleConfirmOtp}
               handleResendOtp={handleResendOtp}

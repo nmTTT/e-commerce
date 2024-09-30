@@ -1,8 +1,10 @@
 import { HiOutlineMailOpen } from "react-icons/hi";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
 import { Button } from "@/app/components/ui/button";
+import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 
 type IVerifyOtpType = {
+  email: string;
   otpValue: string;
   handleConfirmOtp: (value: string) => void;
   handleResendOtp: () => void;
@@ -10,6 +12,7 @@ type IVerifyOtpType = {
 };
 
 const VerifyOtp = ({
+  email,
   otpValue,
   handleConfirmOtp,
   handleResendOtp,
@@ -23,11 +26,14 @@ const VerifyOtp = ({
         </div>
         <div className="flex flex-col items-center gap-2">
           <h1 className="font-semibold text-3xl">Баталгаажуулах</h1>
-          <p>
-            “mujo@nest.edu.mn” хаягт илгээсэн баталгаажуулах кодыг оруулна уу
-          </p>
+          <p>“{`${email}`}” хаягт илгээсэн баталгаажуулах кодыг оруулна уу</p>
         </div>
-        <InputOTP maxLength={4} value={otpValue} onChange={handleConfirmOtp}>
+        <InputOTP
+          maxLength={4}
+          value={otpValue}
+          onChange={handleConfirmOtp}
+          pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
+        >
           <InputOTPGroup className="bg-white ">
             <InputOTPSlot className="w-14 h-14" index={0} />
             <InputOTPSlot className="w-14 h-14" index={1} />
