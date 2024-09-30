@@ -37,7 +37,13 @@ export default function LogIn() {
             >
               Нэвтрэх
             </Button>
-            <Button variant="link" className="text-gray-500">
+            <Button
+              variant="link"
+              className="text-gray-500"
+              onClick={() => {
+                router.push("/forgetPass/emailOtp");
+              }}
+            >
               Нууц үг мартсан
             </Button>
           </div>

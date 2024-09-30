@@ -19,7 +19,6 @@ const EmailOtp = () => {
     setEmail(e.target.value);
   };
   const handleSendOtp = async () => {
-    console.log(email);
     try {
       const res = await axios.post(`${apiUrl}/forget-password`, { email });
       if (res.status === 200) {
@@ -31,6 +30,7 @@ const EmailOtp = () => {
   };
   const handleConfirmOtp = async (value: string) => {
     setOtpValue(value);
+    console.log(otpValue);
     if (value.length === 4) {
       try {
         const res = await axios.post(`${apiUrl}/verify-otp`, {
@@ -48,8 +48,17 @@ const EmailOtp = () => {
       }
     }
   };
-  const handleResendOtp = () => {
+  const handleResendOtp = async () => {
     setCountDown(30);
+    try {
+      const res = await axios.post(`${apiUrl}/forget-password`, { email });
+      console.log(email);
+      if (res.status === 200) {
+        setStep(step + 1);
+      }
+    } catch (error) {
+      toast.error("Имэйл илгээхэд алдаа гарлаа");
+    }
   };
 
   useEffect(() => {
@@ -62,8 +71,8 @@ const EmailOtp = () => {
   }, [countDown]);
 
   return (
-    <div className="h-[calc(100vh-350px)] flex flex-col items-center">
-      <div className="w-full h-full flex justify-center bg-gray-200">
+    <div className="flex flex-col items-center">
+      <div className="w-full py-40 flex justify-center bg-gray-200">
         {step === 1 && (
           <>
             <SendEmail

@@ -8,7 +8,7 @@ type ISendEmailType = {
 
 function SendEmail({ handleEmail, handleSendOtp }: ISendEmailType) {
   return (
-    <div className="bg-gray-200  h-full">
+    <div className="bg-gray-200 py-8 h-full">
       <div className="text-black flex flex-col gap-6 w-[21rem]">
         <div className="flex justify-center">
           <p className="text-4xl font-semibold">Нууц үг сэргээх</p>

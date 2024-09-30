@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Category from "../models/category.model";
+import Size from "../models/size.model";
 
 export const category = async (req: Request, res: Response) => {
   try {
@@ -26,5 +27,20 @@ export const getCategoryData = async (req: Request, res: Response) => {
   } catch (error) {
     console.log("error", error);
     res.status(500).json({ message: "Server Error", error: error });
+  }
+};
+export const size = async (req: Request, res: Response) => {
+  try {
+    const { name } = req.body;
+    if (!name) {
+      res.status(400).json({ message: "fill in data" });
+    }
+    const createdSize = await Size.create({
+      name,
+    });
+    res.status(201).json({ message: "success", user: createdSize });
+  } catch (error: any) {
+    console.log("error", error);
+    res.status(500).json({ message: "Server Error", error: error.message });
   }
 };

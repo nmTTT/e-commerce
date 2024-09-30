@@ -63,7 +63,7 @@ export const getCurrentUser = async (req: Request, res: Response) => {
 
 export const verifyOtp = async (req: Request, res: Response) => {
   const { email, otpValue } = req.body;
-
+  console.log(req.body);
   const findUser = await User.findOne({ email: email, otp: otpValue });
   if (!findUser) {
     return res
