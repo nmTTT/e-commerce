@@ -109,37 +109,27 @@ export const forgetPass = async (req: Request, res: Response) => {
 };
 
 export const verifyPass = async (req: Request, res: Response) => {
-  const { password, resetToken } = req.body;
-
-  const hashedResetToken = crypto
-    .createHash("sha256")
-    .update(resetToken)
-    .digest("hex");
-
-  const findUser = await User.findOne({
-    passwordResetToken: hashedResetToken,
-    passwordResetTokenExpire: { $gt: Date.now },
-  });
-
-  if (!findUser) {
-    return res
-      .status(400)
-      .json({ message: "Таны нууц үг сэргээх хугацаа дууссан байна:" });
-  }
-
-  findUser.password = password;
-  await findUser.save();
-  res.status(200).json({ message: "Нууц үг  амжилттэй сэргээлээ" });
-};
-
-export const resetPass = async (req: Request, res: Response) => {
-  const { password, resettoken, email } = req.body;
   try {
-    if (!password) {
-      const findUser = await User.findOne();
-      const updatePass = await User.updateOne;
+    const { password, resetToken } = req.body;
 
-      res.status(400).json({ message: "Please, enter the password" });
+    const hashedResetToken = crypto
+      .createHash("sha256")
+      .update(resetToken)
+      .digest("hex");
+
+    const findUser = await User.findOne({
+      passwordResetToken: hashedResetToken,
+      passwordResetTokenExpire: { $gt: Date.now() },
+    });
+
+    if (!findUser) {
+      return res
+        .status(400)
+        .json({ message: "Таны нууц үг сэргээх хугацаа дууссан байна:" });
     }
+
+    findUser.password = password;
+    await findUser.save();
+    res.status(200).json({ message: "Нууц үг  амжилттэй сэргээлээ" });
   } catch (error) {}
 };

@@ -24,7 +24,7 @@ const ResetPass = () => {
     try {
       const { password, repassword } = userData;
       if (password === repassword) {
-        const res = await axios.post(`${apiUrl}/reset-password`, {
+        const res = await axios.post(`${apiUrl}/auth/verify-password`, {
           password,
           resetToken: params.get("resettoken"),
           email: params.get("email"),
@@ -44,7 +44,6 @@ const ResetPass = () => {
       ...userData,
       [name]: value,
     });
-    console.log("userdata", userData);
   };
   return (
     <div className="bg-gray-200 p-56">

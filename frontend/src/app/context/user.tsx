@@ -46,7 +46,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const handleLogIn = async () => {
     try {
       console.log("user", apiUrl);
-      const res = await axios.post(`${apiUrl}/logIn`, userData);
+      const res = await axios.post(`${apiUrl}/auth/logIn`, userData);
       console.log("first", res);
       if (res.status === 200) {
         toast.success("User successfully signed in", { autoClose: 1500 });

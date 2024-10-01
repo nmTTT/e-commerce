@@ -7,7 +7,7 @@ import { CiShoppingCart } from "react-icons/ci";
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
 import { useRouter } from "next/navigation";
-import { UserContext } from "@/app/context/user-context";
+import { UserContext } from "@/app/context/user";
 import { CiHeart } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
 import DropDownProfile from "./dropDownProfile";

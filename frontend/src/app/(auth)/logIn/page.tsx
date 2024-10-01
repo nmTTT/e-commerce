@@ -2,14 +2,13 @@
 
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
-import { UserContext } from "@/app/context/user-context";
+import { UserContext } from "@/app/context/user";
 import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
 
 export default function LogIn() {
   const router = useRouter();
   const { handleLogIn, handleUserData } = useContext(UserContext);
-  console.log("first", handleLogIn, handleUserData);
   return (
     <div className="bg-gray-200 p-56">
       <div className="container m-auto text-black flex flex-col gap-6 w-[21rem]">

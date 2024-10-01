@@ -16,8 +16,8 @@ export const sendEmail = async (email: string | string[], rndOtp: string) => {
   return await transporter.sendMail({
     from: "<nomttumurkhuu2@gmail.com>", // sender address
     to: email, // list of receivers
-    subject: "Hello Teacher Ugtakhbayr", // Subject line
-    text: "Hello world?", // plain text body
+    subject: "Verify OTP", // Subject line
+    text: "Verify OTP", // plain text body
     html: generateHtmlTemplate(rndOtp), // html body
   });
 };

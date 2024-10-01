@@ -19,8 +19,8 @@ const app = express();
 // middlewares
 app.use(cors());
 app.use(express.json());
-app.use("/api/v1", authRoute);
-app.use("/api/v1", category);
+app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/category", category);
 
 app.get("/", async (req: Request, res: Response) => {
   const rndOtp = Math.floor(Math.random() * 1000)

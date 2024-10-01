@@ -5,7 +5,7 @@ import Header from "@/app/components/header/index";
 import Footer from "@/app/components/footer/index";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { UserProvider } from "./context/user-context";
+import { UserProvider } from "./context/user";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

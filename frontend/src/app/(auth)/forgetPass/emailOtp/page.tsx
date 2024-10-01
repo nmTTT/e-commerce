@@ -5,7 +5,7 @@ import VerifyOtp from "@/app/components/forgetPass/otp";
 import { apiUrl } from "@/lib/utils";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const EmailOtp = () => {
@@ -20,7 +20,7 @@ const EmailOtp = () => {
   };
   const handleSendOtp = async () => {
     try {
-      const res = await axios.post(`${apiUrl}/forget-password`, { email });
+      const res = await axios.post(`${apiUrl}/auth/forget-password`, { email });
       if (res.status === 200) {
         setStep(step + 1);
       }
@@ -33,7 +33,7 @@ const EmailOtp = () => {
     console.log(value, otpValue);
     if (value.length === 4) {
       try {
-        const res = await axios.post(`${apiUrl}/verify-otp`, {
+        const res = await axios.post(`${apiUrl}/auth/verify-otp`, {
           email,
           otpValue: value,
         });
@@ -52,7 +52,7 @@ const EmailOtp = () => {
   const handleResendOtp = async () => {
     setCountDown(30);
     try {
-      const res = await axios.post(`${apiUrl}/forget-password`, { email });
+      const res = await axios.post(`${apiUrl}/auth/forget-password`, { email });
       console.log(email);
       if (res.status === 200) {
         setStep(step + 1);

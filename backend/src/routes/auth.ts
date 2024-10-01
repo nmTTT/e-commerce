@@ -6,7 +6,6 @@ import {
   verifyOtp,
   forgetPass,
   verifyPass,
-  resetPass,
 } from "../controllers/auth";
 import { auth } from "../middlewares/auth";
 
@@ -18,6 +17,5 @@ router.route("/signUp").post(signUp);
 router.route("/verify-otp").post(verifyOtp);
 router.route("/forget-password").post(forgetPass);
 router.route("/verify-password").post(verifyPass);
-router.route("/reset-password").post(resetPass);
 
 export default router;
