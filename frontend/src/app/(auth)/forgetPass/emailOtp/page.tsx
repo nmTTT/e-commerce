@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 
 const EmailOtp = () => {
   const router = useRouter();
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
   const [email, setEmail] = useState("");
   const [otpValue, setOtpValue] = useState<string>("");
   const [countDown, setCountDown] = useState(30);
@@ -35,7 +35,7 @@ const EmailOtp = () => {
       try {
         const res = await axios.post(`${apiUrl}/verify-otp`, {
           email,
-          otpValue,
+          otpValue: value,
         });
         if (res.status === 200) {
           toast.success(

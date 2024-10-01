@@ -50,7 +50,7 @@ function SignUp() {
           router.push("/logIn");
         }
       } else {
-        console.log("couldn't create user");
+        console.log("password doesn't match");
       }
     } catch (error) {
       console.log("error", error);

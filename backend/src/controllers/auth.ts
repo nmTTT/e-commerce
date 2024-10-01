@@ -83,7 +83,7 @@ export const verifyOtp = async (req: Request, res: Response) => {
 
   await sendEmail(
     email,
-    `<a href="http://localhost:3000/forgetPass/newPassword?resettoken=${resetToken}"&email=${email}>Нууц үг сэргээх холбоос</a>`
+    `<a href="http://localhost:3000/forgetPass/newPassword?resettoken=${resetToken}&email=${email}>Нууц үг сэргээх холбоос</a>`
   );
   res.status(200).json({ message: "Нууц үг сэргээх имэйл илгээлээ" });
 };
@@ -133,9 +133,13 @@ export const verifyPass = async (req: Request, res: Response) => {
 };
 
 export const resetPass = async (req: Request, res: Response) => {
-  const { password } = req.body;
-  if (!password) {
-    res.status(400).json({ message: "Please, enter the password" });
-  }
-  const updatePass = await User.updateOne;
+  const { password, resettoken, email } = req.body;
+  try {
+    if (!password) {
+      const findUser = await User.findOne();
+      const updatePass = await User.updateOne;
+
+      res.status(400).json({ message: "Please, enter the password" });
+    }
+  } catch (error) {}
 };

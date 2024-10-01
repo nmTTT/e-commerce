@@ -4,7 +4,7 @@ import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
 import { apiUrl } from "@/lib/utils";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 
 interface IUserData {
@@ -14,6 +14,7 @@ interface IUserData {
 
 const ResetPass = () => {
   const router = useRouter();
+  const params = useSearchParams();
   const [userData, setUserData] = useState<IUserData>({
     password: "",
     repassword: "",
@@ -23,7 +24,11 @@ const ResetPass = () => {
     try {
       const { password, repassword } = userData;
       if (password === repassword) {
-        const res = await axios.post(`${apiUrl}/reset-password`, password);
+        const res = await axios.post(`${apiUrl}/reset-password`, {
+          password,
+          resetToken: params.get("resettoken"),
+          email: params.get("email"),
+        });
         if (res.status === 200) {
           router.push("/logIn");
         }
