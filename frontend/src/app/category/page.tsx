@@ -5,7 +5,7 @@ import { Checkbox } from "../components/ui/checkbox";
 
 const CategoryPage = () => {
   return (
-    <div className="mt-[60px] mb-[100px]">
+    <div className="pt-[60px] pb-[100px] bg-gray-100 text-black">
       <div className="container m-auto flex justify-center gap-5">
         <div className="flex flex-col gap-12 w-[15rem]">
           <div className="flex flex-col gap-4 ">
