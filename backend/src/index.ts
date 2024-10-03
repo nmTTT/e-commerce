@@ -8,6 +8,7 @@ import authRoute from "./routes/auth";
 import { connectDB } from "./config/db";
 import { sendEmail } from "./utils/sendEmail";
 import category from "./routes/category";
+import products from "./routes/product";
 
 const MONGO_URI = process.env.MONGO_URI || "";
 const PORT = process.env.PORT || "";
@@ -21,6 +22,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/category", category);
+app.use("/api/v1/products", products);
 
 app.get("/", async (req: Request, res: Response) => {
   const rndOtp = Math.floor(Math.random() * 1000)

@@ -47,7 +47,7 @@ function Header() {
           <Input
             type="text"
             placeholder="Бүтээгдэхүүн хайх"
-            className="bg-primary border-none pr-20"
+            className="bg-primary border-none pr-20 text-white"
           />
         </div>
         <div className="text-white flex items-center">
@@ -66,6 +66,7 @@ function Header() {
               <Button onClick={() => setOpenProfile((prev) => !prev)}>
                 <CiUser />
               </Button>
+              {openProfile === true && <DropDownProfile logOut={logOut} />}
             </div>
           ) : (
             <div className="flex gap-2 pl-4">
@@ -87,7 +88,6 @@ function Header() {
               </Button>
             </div>
           )}
-          {openProfile === true && <DropDownProfile logOut={logOut} />}
         </div>
       </div>
     </div>
