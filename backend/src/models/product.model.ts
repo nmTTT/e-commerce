@@ -16,7 +16,7 @@ interface IProduct {
   quantity: number;
   discount: number;
   category: Schema.Types.ObjectId;
-  comment: [IComment];
+  comment?: [IComment];
 }
 
 const productSchema = new Schema<IProduct>(
@@ -67,5 +67,5 @@ const productSchema = new Schema<IProduct>(
   }
 );
 
-const Product = model<IProduct>("product", productSchema);
+const Product = model<IProduct>("products", productSchema);
 export default Product;

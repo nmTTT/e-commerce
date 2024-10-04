@@ -1,30 +1,47 @@
-// import { CategoryBigCard } from "@/components/categoryCard/categoryBigCard";
-// import { CategoryMediumCard } from "@/components/categoryCard/categoryMediumCard";
-// import { CategorySmallCard } from "@/components/categoryCard/categorysmallCard";
-import React from "react";
+"use client";
 
-function MainHome() {
+import { ProductContext } from "@/app/context/product";
+import Link from "next/link";
+import { useContext } from "react";
+
+const MainHome = () => {
+  const { products } = useContext(ProductContext);
+  console.log(products);
   return (
-    <div className="w-screen bg-white flex flex-col items-center gap-4 pb-28">
-      <div className="w-full h-[28rem] text-3xl flex flex-col-reverse items-center bg-contain bg-[url(https://images.unsplash.com/photo-1487088678257-3a541e6e3922?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)]">
-        <div className="text-black w-1/2">
-          <p>Wildflower Hoodie</p>
-          <p className="font-semibold">120’000₮</p>
-        </div>
+    <div>
+      <div className="h-[446px] relative bg-[url('/images/homepage1.png')] bg-cover bg-[center_top_-50rem] bg-no-repeat px-52 py-7 flex flex-col justify-end gap-4">
+        <p className="text-xl">Wild Flower Hoodie</p>
+        <p className="text-4xl font-bold">120000₮</p>
       </div>
-      <div className="flex flex-col gap-12 w-3/4">
-        <div className="grid grid-cols-4 gap-5">
-          {/* {[].map((pr, idx) => {
-            if (idx === 3) {
-              return <CategoryBigCard />;
-            } else if (idx === 4) {
-              return <CategoryMediumCard />;
-            } else return <CategorySmallCard />;
-          })} */}
-        </div>
+      <div className="m-auto container grid grid-cols-4 gap-5 my-10 grid-row-6">
+        {products?.map((product, i) => {
+          return (
+            <>
+              <Link href={"/" + product._id}>
+                {i === 6 || i === 7 ? (
+                  <div className="col-span-2 row-span-2 bg-red-400">
+                    <div className="h-[692px] w-full rounded-2xl overflow-hidden">
+                      <img src={product.images[0]} alt="" className="w-full" />
+                    </div>
+                    <p>{product.name}</p>
+                    <p className="font-bold">{product.price}</p>
+                  </div>
+                ) : (
+                  <div>
+                    <div className="h-[331px] w-full rounded-2xl overflow-hidden">
+                      <img src={product.images[0]} alt="" className="w-full" />
+                    </div>
+
+                    <p>{product.name}</p>
+                    <p className="font-bold">{product.price}</p>
+                  </div>
+                )}
+              </Link>
+            </>
+          );
+        })}
       </div>
     </div>
   );
-}
-
+};
 export default MainHome;

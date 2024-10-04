@@ -11,12 +11,14 @@ import { UserContext } from "@/app/context/user";
 import { CiHeart } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
 import DropDownProfile from "./dropDownProfile";
+import Link from "next/link";
 
 function Header() {
   const router = useRouter();
   const { userToken, setUserToken } = useContext(UserContext);
   const [openProfile, setOpenProfile] = useState(false);
   const logOut = () => {
+    console.log("first");
     localStorage.removeItem("token");
     setUserToken("");
     setOpenProfile(false);
@@ -30,17 +32,21 @@ function Header() {
   return (
     <div className="bg-black py-4">
       <div className="m-auto container flex justify-between">
-        <div className="text-white flex gap-8">
-          <div className="flex gap-2 items-center">
-            <Image
-              src="/images/Vector.png"
-              width={30}
-              height={15}
-              alt="vector"
-            />
-            <p className="text-lg">ECOMMERCE</p>
-          </div>
-          <button className="text-lg">Ангилал</button>
+        <div className="text-white flex items-center gap-8">
+          <Link href="/">
+            <div className="flex gap-2 items-center">
+              <Image
+                src="/images/Vector.png"
+                width={30}
+                height={15}
+                alt="vector"
+              />
+              <p className="text-lg">ECOMMERCE</p>
+            </div>
+          </Link>
+          <Link href="/category" className="text-lg">
+            Ангилал
+          </Link>
         </div>
         <div className="flex rounded-full bg-primary py-2 px-4 items-center">
           <CiSearch className="text-white text-2xl" />
