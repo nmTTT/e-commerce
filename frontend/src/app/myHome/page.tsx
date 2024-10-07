@@ -9,8 +9,8 @@ const MainHome = () => {
   const { products } = useContext(ProductContext);
   console.log(products);
   return (
-    <div>
-      <div className="h-[446px] relative bg-[url('/images/.png')] bg-cover bg-[center] bg-no-repeat px-52 py-7 flex flex-col justify-end gap-4">
+    <div className="bg-gray-200 text-black">
+      <div className="h-[446px] relative bg-[url('/images/hoodie.png')] bg-cover bg-[center] bg-no-repeat px-52 py-7 flex flex-col justify-end gap-4">
         <p className="text-xl">Wild Flower Hoodie</p>
         <p className="text-4xl font-bold">120000₮</p>
       </div>
@@ -27,7 +27,7 @@ const MainHome = () => {
                         alt=""
                         width={100}
                         height={100}
-                        className="w-full"
+                        className="w-full h-full"
                       />
                     </div>
                     <p>{product.name}</p>

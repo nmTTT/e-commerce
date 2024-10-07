@@ -23,7 +23,7 @@ const ProductDetail = () => {
     getProduct(id);
   }, []);
   return (
-    <div>
+    <div className="bg-gray-200 text-black">
       <p>Product detail is here</p>
       <p>{id}</p>
       <p>{product.name}</p>
