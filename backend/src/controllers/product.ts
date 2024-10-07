@@ -34,7 +34,7 @@ export const createNewProduct = async (req: Request, res: Response) => {
 
 export const getAllProducts = async (req: Request, res: Response) => {
   try {
-    const allProducts = await Product.find({}).populate("categories");
+    const allProducts = await Product.find({}).populate("category");
     console.log("products", allProducts);
     res.status(200).json({ message: "success", user: allProducts });
   } catch (error: any) {
@@ -46,7 +46,7 @@ export const getAllProducts = async (req: Request, res: Response) => {
 export const getProduct = async (req: Request, res: Response) => {
   const { productId } = req.params;
   try {
-    const product = await Product.findById(productId).populate("categories");
+    const product = await Product.findById(productId).populate("category");
     res.status(200).json({ message: "success to get one product", product });
   } catch (error) {
     console.error(error);

@@ -15,7 +15,7 @@ interface IProduct {
   isNew: boolean;
   quantity: number;
   discount: number;
-  category: Schema.Types.ObjectId;
+  category: [Schema.Types.ObjectId];
   comment?: [IComment];
 }
 
@@ -54,12 +54,12 @@ const productSchema = new Schema<IProduct>(
       type: Number,
       default: 0,
     },
-    category: {
-      type: Schema.Types.ObjectId,
-      required: true,
-      ref: "Category",
-    },
-
+    category: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Category",
+      },
+    ],
     comment: [{ name: String, comment: String, rating: Number }],
   },
   {

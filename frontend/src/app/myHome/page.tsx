@@ -1,6 +1,7 @@
 "use client";
 
 import { ProductContext } from "@/app/context/product";
+import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
 
@@ -9,7 +10,7 @@ const MainHome = () => {
   console.log(products);
   return (
     <div>
-      <div className="h-[446px] relative bg-[url('/images/homepage1.png')] bg-cover bg-[center_top_-50rem] bg-no-repeat px-52 py-7 flex flex-col justify-end gap-4">
+      <div className="h-[446px] relative bg-[url('/images/.png')] bg-cover bg-[center] bg-no-repeat px-52 py-7 flex flex-col justify-end gap-4">
         <p className="text-xl">Wild Flower Hoodie</p>
         <p className="text-4xl font-bold">120000₮</p>
       </div>
@@ -21,7 +22,13 @@ const MainHome = () => {
                 {i === 6 || i === 7 ? (
                   <div className="col-span-2 row-span-2 bg-red-400">
                     <div className="h-[692px] w-full rounded-2xl overflow-hidden">
-                      <img src={product.images[0]} alt="" className="w-full" />
+                      <Image
+                        src={product.images[0]}
+                        alt=""
+                        width={100}
+                        height={100}
+                        className="w-full"
+                      />
                     </div>
                     <p>{product.name}</p>
                     <p className="font-bold">{product.price}</p>
@@ -29,7 +36,13 @@ const MainHome = () => {
                 ) : (
                   <div>
                     <div className="h-[331px] w-full rounded-2xl overflow-hidden">
-                      <img src={product.images[0]} alt="" className="w-full" />
+                      <Image
+                        src={product.images[0]}
+                        alt=""
+                        width={100}
+                        height={100}
+                        className="w-full"
+                      />
                     </div>
 
                     <p>{product.name}</p>
