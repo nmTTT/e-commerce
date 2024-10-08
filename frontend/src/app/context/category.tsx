@@ -1,22 +1,47 @@
+"use client";
+
 import { apiUrl } from "@/lib/utils";
 import axios from "axios";
-import { createContext } from "vm";
+import { useEffect, useState, createContext } from "react";
 
-const CategoryContext = createContext();
+export interface ICategory {
+  name: string;
+  description: string;
+}
 
-export const CategoryProvider = ({
+interface ICategoryContext {
+  myCategory: ICategory[];
+  getCategoryData: () => void;
+}
+
+export const MyCategoryContext = createContext<ICategoryContext>({
+  myCategory: [],
+  getCategoryData: () => {},
+});
+
+export const MyCategoryProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
+  const [myCategory, setMyCategory] = useState<ICategory[]>([]);
+
   const getCategoryData = async () => {
-    const res = await axios.get(`${apiUrl}/category/getCategoryData`);
-    if (res.status === 201) {
+    try {
+      const res = await axios.get(`${apiUrl}/category`);
+      setMyCategory(res.data.categories);
+      console.log("categories", myCategory);
+    } catch (error) {
+      console.error("Error fetching category data:", error);
     }
   };
+
+  useEffect(() => {
+    getCategoryData();
+  }, []);
   return (
-    <CategoryContext.Provider value={getCategoryData}>
+    <MyCategoryContext.Provider value={{ getCategoryData, myCategory }}>
       {children}
-    </CategoryContext.Provider>
+    </MyCategoryContext.Provider>
   );
 };

@@ -3,8 +3,8 @@
 import { ProductContext } from "@/app/context/product";
 import Link from "next/link";
 import { useContext } from "react";
-import { ProductBigCard } from "../components/productCard/productBigCard";
-import { ProductSmallCard } from "../components/productCard/productSmallCard";
+
+import Image from "next/image";
 
 const MainHome = () => {
   const { products } = useContext(ProductContext);
@@ -19,13 +19,39 @@ const MainHome = () => {
         {products?.map((product, i) => {
           return (
             <>
-              <Link href={"/" + product._id}>
-                {i === 6 || i === 7 ? (
-                  <ProductBigCard product={product} />
-                ) : (
-                  <ProductSmallCard product={product} />
-                )}
-              </Link>
+              {i === 6 || i === 7 ? (
+                <div className="row-span-2 col-span-2">
+                  <Link href={"/" + product._id} className="h-full w-full">
+                    <div className="h-[692px] w-full rounded-2xl overflow-hidden">
+                      <Image
+                        src={product.images[0]}
+                        alt=""
+                        width={200}
+                        height={200}
+                        className="w-full h-full"
+                      />
+                    </div>
+                    <p>{product.name}</p>
+                    <p className="font-bold">{product.price}</p>
+                  </Link>
+                </div>
+              ) : (
+                <div>
+                  <Link href={"/" + product._id} className="h-full w-full">
+                    <div className="h-[331px] w-full rounded-2xl overflow-hidden">
+                      <Image
+                        src={product.images[0]}
+                        alt=""
+                        width={100}
+                        height={100}
+                        className="w-full h-full"
+                      />
+                    </div>
+                    <p>{product.name}</p>
+                    <p className="font-bold">{product.price}</p>
+                  </Link>
+                </div>
+              )}
             </>
           );
         })}

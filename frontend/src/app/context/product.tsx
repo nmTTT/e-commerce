@@ -1,5 +1,6 @@
 "use client";
 
+import { apiUrl } from "@/lib/utils";
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 
@@ -16,12 +17,12 @@ export interface IProduct {
   category: string;
 }
 
-interface IproductContext {
+interface IProductContext {
   products: IProduct[];
   fetchProductData: () => void;
 }
 
-export const ProductContext = createContext<IproductContext>({
+export const ProductContext = createContext<IProductContext>({
   products: [],
   fetchProductData: () => {},
 });
@@ -35,9 +36,7 @@ export const ProductProvider = ({
 
   const fetchProductData = async () => {
     try {
-      const res = await axios.get(
-        `http://localhost:8000/api/v1/products/get-all`
-      );
+      const res = await axios.get(`${apiUrl}/products/get-all`);
       setProducts(res.data.user);
       console.log("products", products);
     } catch (error) {

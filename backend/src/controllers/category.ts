@@ -26,7 +26,7 @@ export const getCategoryData = async (req: Request, res: Response) => {
       .json({ message: "success", categories: getAllCategoryData });
   } catch (error) {
     console.log("error", error);
-    res.status(500).json({ message: "Server Error", error: error });
+    res.status(400).json({ message: "Server Error", error: error });
   }
 };
 export const size = async (req: Request, res: Response) => {

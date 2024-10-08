@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Product from "../models/product.model";
+import Size from "../models/size.model";
 
 export const createNewProduct = async (req: Request, res: Response) => {
   try {
@@ -34,7 +35,7 @@ export const createNewProduct = async (req: Request, res: Response) => {
 
 export const getAllProducts = async (req: Request, res: Response) => {
   try {
-    const allProducts = await Product.find({}).populate(["category", "size"]);
+    const allProducts = await Product.find({}).populate("category");
     console.log("products", allProducts);
     res.status(200).json({ message: "success", user: allProducts });
   } catch (error: any) {
@@ -42,7 +43,6 @@ export const getAllProducts = async (req: Request, res: Response) => {
     res.status(404).json({ message: "aldaa garlaa", error: error.message });
   }
 };
-
 export const getProduct = async (req: Request, res: Response) => {
   const { productId } = req.params;
   try {
@@ -51,5 +51,15 @@ export const getProduct = async (req: Request, res: Response) => {
   } catch (error) {
     console.error(error);
     res.status(400).json({ message: "failed to get one product" });
+  }
+};
+
+export const getSize = async (req: Request, res: Response) => {
+  try {
+    const getAllSize = await Size.find({});
+    res.status(201).json({ message: "success", categories: getAllSize });
+  } catch (error) {
+    console.log("error", error);
+    res.status(400).json({ message: "Server Error", error: error });
   }
 };

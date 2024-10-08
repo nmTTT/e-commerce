@@ -1,68 +1,37 @@
 "use client";
 
-import { CategorySmallCard } from "../components/categoryCard/categorySmallCard";
+import { useContext } from "react";
 import { Checkbox } from "../components/ui/checkbox";
+import { ProductContext } from "../context/product";
+import { ProductSmallCard } from "../components/productCard/productSmallCard";
+import { MyCategoryContext } from "../context/category";
 
 const CategoryPage = () => {
+  const { products } = useContext(ProductContext);
+  const { myCategory } = useContext(MyCategoryContext);
+
   return (
     <div className="pt-[60px] pb-[100px] bg-gray-100 text-black">
       <div className="container m-auto flex justify-center gap-5">
         <div className="flex flex-col gap-12 w-[15rem]">
           <div className="flex flex-col gap-4 ">
             <p className="font-semibold text-2xl">Ангилал</p>
-            <div className="flex items-center gap-2">
-              <Checkbox id="terms1" />
-              <label
-                htmlFor="terms1"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                Малгай
-              </label>
-            </div>
-            <div className="flex items-center gap-2">
-              <Checkbox id="terms2" />
-              <label
-                htmlFor="terms2"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                Усны сав
-              </label>
-            </div>
-            <div className="flex items-center gap-2">
-              <Checkbox id="terms3" />
-              <label
-                htmlFor="terms3"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                T-shirt
-              </label>
-            </div>
-            <div className="flex items-center gap-2">
-              <Checkbox id="terms4" />
-              <label
-                htmlFor="terms4"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                Hoodie
-              </label>
-            </div>
-            <div className="flex items-center gap-2">
-              <Checkbox id="terms5" />
-              <label
-                htmlFor="terms5"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                Tee
-              </label>
-            </div>
-            <div className="flex items-center gap-2">
-              <Checkbox id="terms5" />
-              <label
-                htmlFor="terms5"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                Цүнх
-              </label>
+            <div className="flex flex-col gap-2">
+              {myCategory?.map((cat) => {
+                return (
+                  <>
+                    <div className="flex items-center gap-2">
+                      <Checkbox id={cat.description} />
+                      <label
+                        htmlFor={cat.description}
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      >
+                        {cat.name}
+                      </label>
+                    </div>
+                  </>
+                );
+              })}
             </div>
           </div>
           <div className="flex flex-col gap-4 ">
@@ -133,18 +102,13 @@ const CategoryPage = () => {
           </div>
         </div>
         <div className="grid grid-cols-3 gap-y-12 gap-x-5">
-          <CategorySmallCard />
-          <CategorySmallCard />
-          <CategorySmallCard />
-          <CategorySmallCard />
-          <CategorySmallCard />
-          <CategorySmallCard />
-          <CategorySmallCard />
-          <CategorySmallCard />
-          <CategorySmallCard />
-          <CategorySmallCard />
-          <CategorySmallCard />
-          <CategorySmallCard />
+          {products?.map((product) => {
+            return (
+              <>
+                <ProductSmallCard product={product} />
+              </>
+            );
+          })}
         </div>
       </div>
     </div>
