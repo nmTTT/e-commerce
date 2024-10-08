@@ -7,8 +7,9 @@ dotenv.config();
 import authRoute from "./routes/auth";
 import { connectDB } from "./config/db";
 import { sendEmail } from "./utils/sendEmail";
-import category from "./routes/category";
-import products from "./routes/product";
+import categoryRoute from "./routes/category";
+import productRoute from "./routes/product";
+import cartRoute from "./routes/cart";
 
 const MONGO_URI = process.env.MONGO_URI || "";
 const PORT = process.env.PORT || "";
@@ -21,8 +22,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/api/v1/auth", authRoute);
-app.use("/api/v1/category", category);
-app.use("/api/v1/products", products);
+app.use("/api/v1/category", categoryRoute);
+app.use("/api/v1/products", productRoute);
+app.use("/api/v1/carts", cartRoute);
 
 app.get("/", async (req: Request, res: Response) => {
   const rndOtp = Math.floor(Math.random() * 1000)
