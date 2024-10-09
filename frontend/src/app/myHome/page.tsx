@@ -8,7 +8,6 @@ import Image from "next/image";
 
 const MainHome = () => {
   const { products } = useContext(ProductContext);
-  console.log(products);
   return (
     <div className="bg-white text-black">
       <div className="h-[446px] relative bg-[url('/images/hoodie.png')] bg-cover bg-[center] bg-no-repeat px-52 py-7 flex flex-col justify-end gap-4">
@@ -28,7 +27,7 @@ const MainHome = () => {
                         alt=""
                         width={200}
                         height={200}
-                        className="w-full h-full"
+                        className="w-full"
                       />
                     </div>
                     <p>{product.name}</p>
@@ -44,7 +43,7 @@ const MainHome = () => {
                         alt=""
                         width={100}
                         height={100}
-                        className="w-full h-full"
+                        className="w-full"
                       />
                     </div>
                     <p>{product.name}</p>

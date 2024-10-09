@@ -18,7 +18,6 @@ const ProductDetail = () => {
       toast.error("aldaa garlaa product detail error");
     }
   };
-  console.log("++++++", product);
   useEffect(() => {
     getProduct(id);
   }, []);

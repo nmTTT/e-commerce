@@ -43,6 +43,27 @@ export const getAllProducts = async (req: Request, res: Response) => {
     res.status(404).json({ message: "aldaa garlaa", error: error.message });
   }
 };
+
+export const getAllProductsWithSearch = async (req: Request, res: Response) => {
+  const { category, size, name } = req.body;
+
+  try {
+    const query: any = {};
+    if (category) query.category = category;
+    if (size) query.size = size;
+    if (name) {
+      query.name = { $regex: new RegExp(name, "i") };
+    }
+
+    const products = await Product.find(query);
+    const lastProduct = await Product.find().sort({ createdAt: -1 }).limit(1);
+    res.status(200).json({ message: "success", products, lastProduct });
+  } catch (error) {
+    res.status(401).json({ error: "Failed to retrieve products" });
+    console.error(error);
+  }
+};
+
 export const getProduct = async (req: Request, res: Response) => {
   const { productId } = req.params;
   try {
@@ -57,9 +78,9 @@ export const getProduct = async (req: Request, res: Response) => {
 export const getSize = async (req: Request, res: Response) => {
   try {
     const getAllSize = await Size.find({});
-    res.status(201).json({ message: "success", categories: getAllSize });
+    res.status(201).json({ message: "success", size: getAllSize });
   } catch (error) {
     console.log("error", error);
-    res.status(400).json({ message: "Server Error", error: error });
+    res.status(401).json({ message: "Server Error", error: error });
   }
 };

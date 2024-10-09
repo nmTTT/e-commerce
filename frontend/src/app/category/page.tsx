@@ -1,14 +1,16 @@
 "use client";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Checkbox } from "../components/ui/checkbox";
 import { ProductContext } from "../context/product";
 import { ProductSmallCard } from "../components/productCard/productSmallCard";
 import { MyCategoryContext } from "../context/category";
 
 const CategoryPage = () => {
+  const [catList, setCatList] = useState();
   const { products } = useContext(ProductContext);
-  const { myCategory } = useContext(MyCategoryContext);
+  const { myCategory, size } = useContext(MyCategoryContext);
+  console.log("d", size);
 
   return (
     <div className="pt-[60px] pb-[100px] bg-gray-100 text-black">
@@ -21,10 +23,15 @@ const CategoryPage = () => {
                 return (
                   <>
                     <div className="flex items-center gap-2">
-                      <Checkbox id={cat.description} />
+                      <Checkbox
+                        id={cat.description}
+                        onChange={(e) => {
+                          setCatList(e.target.value);
+                        }}
+                      />
                       <label
                         htmlFor={cat.description}
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        className="text-md font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                       >
                         {cat.name}
                       </label>
@@ -36,68 +43,22 @@ const CategoryPage = () => {
           </div>
           <div className="flex flex-col gap-4 ">
             <p className="font-semibold text-2xl">Хэмжээ</p>
-            <div className="flex items-center gap-2">
-              <Checkbox id="terms5" />
-              <label
-                htmlFor="terms5"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                Free
-              </label>
-            </div>
-            <div className="flex items-center gap-2">
-              <Checkbox id="terms5" />
-              <label
-                htmlFor="terms5"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                S
-              </label>
-            </div>
-            <div className="flex items-center gap-2">
-              <Checkbox id="terms5" />
-              <label
-                htmlFor="terms5"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                M
-              </label>
-            </div>
-            <div className="flex items-center gap-2">
-              <Checkbox id="terms5" />
-              <label
-                htmlFor="terms5"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                L
-              </label>
-            </div>
-            <div className="flex items-center gap-2">
-              <Checkbox id="terms5" />
-              <label
-                htmlFor="terms5"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                XL
-              </label>
-            </div>
-            <div className="flex items-center gap-2">
-              <Checkbox id="terms5" />
-              <label
-                htmlFor="terms5"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                2XL
-              </label>
-            </div>
-            <div className="flex items-center gap-2">
-              <Checkbox id="terms5" />
-              <label
-                htmlFor="terms5"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                3XL
-              </label>
+            <div className="flex flex-col gap-2">
+              {size?.map((s) => {
+                return (
+                  <>
+                    <div className="flex items-center gap-2">
+                      <Checkbox id={s.description} />
+                      <label
+                        htmlFor={s.description}
+                        className="text-md font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      >
+                        {s.name}
+                      </label>
+                    </div>
+                  </>
+                );
+              })}
             </div>
           </div>
         </div>

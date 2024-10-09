@@ -38,7 +38,6 @@ export const ProductProvider = ({
     try {
       const res = await axios.get(`${apiUrl}/products/get-all`);
       setProducts(res.data.user);
-      console.log("products", products);
     } catch (error) {
       console.error("Error fetching user data:", error);
     }

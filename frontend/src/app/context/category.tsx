@@ -10,11 +10,13 @@ export interface ICategory {
 }
 
 interface ICategoryContext {
+  size: ICategory[];
   myCategory: ICategory[];
   getCategoryData: () => void;
 }
 
 export const MyCategoryContext = createContext<ICategoryContext>({
+  size: [],
   myCategory: [],
   getCategoryData: () => {},
 });
@@ -25,22 +27,30 @@ export const MyCategoryProvider = ({
   children: React.ReactNode;
 }) => {
   const [myCategory, setMyCategory] = useState<ICategory[]>([]);
+  const [size, setSize] = useState<ICategory[]>([]);
 
   const getCategoryData = async () => {
     try {
       const res = await axios.get(`${apiUrl}/category`);
       setMyCategory(res.data.categories);
-      console.log("categories", myCategory);
     } catch (error) {
       console.error("Error fetching category data:", error);
     }
   };
+  const getSize = async () => {
+    try {
+      const res = await axios.get(`${apiUrl}/category/size`);
+      setSize(res.data.size);
+      console.log("size", size);
+    } catch (error) {}
+  };
 
   useEffect(() => {
     getCategoryData();
+    getSize();
   }, []);
   return (
-    <MyCategoryContext.Provider value={{ getCategoryData, myCategory }}>
+    <MyCategoryContext.Provider value={{ getCategoryData, myCategory, size }}>
       {children}
     </MyCategoryContext.Provider>
   );
