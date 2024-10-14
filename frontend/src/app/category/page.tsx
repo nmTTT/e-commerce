@@ -7,7 +7,7 @@ import { ProductSmallCard } from "../components/productCard/productSmallCard";
 import { MyCategoryContext } from "../context/category";
 
 const CategoryPage = () => {
-  const [catList, setCatList] = useState();
+  const [catList, setCatList] = useState("");
   const { products } = useContext(ProductContext);
   const { myCategory, size } = useContext(MyCategoryContext);
   console.log("d", size);
@@ -23,12 +23,7 @@ const CategoryPage = () => {
                 return (
                   <>
                     <div className="flex items-center gap-2">
-                      <Checkbox
-                        id={cat.description}
-                        onChange={(e) => {
-                          setCatList(e.target.value);
-                        }}
-                      />
+                      <Checkbox id={cat.description} />
                       <label
                         htmlFor={cat.description}
                         className="text-md font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
