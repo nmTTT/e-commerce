@@ -32,6 +32,7 @@ const ProductDetail = () => {
     category: "",
   });
   const getProduct = async (id: string | string[]) => {
+    const { id } = useParams();
     try {
       const res = await axios.get(`${apiUrl}/products/${id}`);
       setProduct(res.data.product);

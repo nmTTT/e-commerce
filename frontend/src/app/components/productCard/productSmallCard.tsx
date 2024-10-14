@@ -10,7 +10,10 @@ type ProductBigCardProps = {
 export const ProductSmallCard = ({ product }: ProductBigCardProps) => {
   return (
     <div>
-      <Link href={"/" + product._id} className="h-full w-full">
+      <Link
+        href={"/" + product._id + "?cat_id+" + product.category}
+        className="h-full w-full"
+      >
         <div className="h-[331px] w-full rounded-2xl overflow-hidden">
           <Image
             src={product.images[0]}
