@@ -1,16 +1,36 @@
 "use client";
 
 import { useContext, useState } from "react";
-import { Checkbox } from "../components/ui/checkbox";
 import { ProductContext } from "../context/product";
 import { ProductSmallCard } from "../components/productCard/productSmallCard";
 import { MyCategoryContext } from "../context/category";
+import { RadioGroup, RadioGroupItem } from "../components/ui/radio-group";
+import { Label } from "../components/ui/label";
+import axios from "axios";
+import { apiUrl } from "@/lib/utils";
 
 const CategoryPage = () => {
-  const [catList, setCatList] = useState("");
   const { products } = useContext(ProductContext);
   const { myCategory, size } = useContext(MyCategoryContext);
-  console.log("d", size);
+  const [catList, setCatList] = useState<string | null>(null);
+
+  const getAllProducts = async () => {
+    try {
+      const res = await axios.post(`${apiUrl}/get/products/search`, {
+        name: search,
+        category,
+        size,
+      });
+      if (res.status === 200) {
+        const { products, lastProduct } = res.data;
+        setProducts(products);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  console.log("d", myCategory);
 
   return (
     <div className="pt-[60px] pb-[100px] bg-gray-100 text-black">
@@ -19,41 +39,48 @@ const CategoryPage = () => {
           <div className="flex flex-col gap-4 ">
             <p className="font-semibold text-2xl">Ангилал</p>
             <div className="flex flex-col gap-2">
-              {myCategory?.map((cat) => {
-                return (
-                  <>
-                    <div className="flex items-center gap-2">
-                      <Checkbox id={cat.description} />
-                      <label
-                        htmlFor={cat.description}
-                        className="text-md font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      >
-                        {cat.name}
-                      </label>
+              <RadioGroup
+                defaultValue="All"
+                onValueChange={(value) => {
+                  setCatList(value);
+                }}
+              >
+                <div className="flex items-center gap-6 w-[180px]">
+                  <RadioGroupItem value="All" id="All" />
+                  <Label htmlFor="All">All Category</Label>
+                </div>
+                {myCategory?.map((cat, idx) => {
+                  return (
+                    <div
+                      className="flex items-center gap-6 w-[180px]"
+                      key={idx}
+                    >
+                      <RadioGroupItem value={cat._id} id={cat._id} />
+                      <Label htmlFor={cat._id}>{cat.name}</Label>
                     </div>
-                  </>
-                );
-              })}
+                  );
+                })}
+              </RadioGroup>
             </div>
           </div>
           <div className="flex flex-col gap-4 ">
-            <p className="font-semibold text-2xl">Хэмжээ</p>
-            <div className="flex flex-col gap-2">
-              {size?.map((s) => {
-                return (
-                  <>
-                    <div className="flex items-center gap-2">
-                      <Checkbox id={s.description} />
-                      <label
-                        htmlFor={s.description}
-                        className="text-md font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      >
+            <label className="font-semibold text-2xl">Хэмжээ</label>
+            <div className="flex flex-col">
+              <RadioGroup defaultValue="">
+                {size?.map((s, idx) => {
+                  return (
+                    <div
+                      className="flex items-center gap-6 w-[180px]"
+                      key={idx}
+                    >
+                      <RadioGroupItem value={s._id} id={s._id} />
+                      <Label htmlFor={s._id} className="">
                         {s.name}
-                      </label>
+                      </Label>
                     </div>
-                  </>
-                );
-              })}
+                  );
+                })}
+              </RadioGroup>
             </div>
           </div>
         </div>

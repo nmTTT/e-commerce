@@ -7,6 +7,7 @@ import { useEffect, useState, createContext } from "react";
 export interface ICategory {
   name: string;
   description: string;
+  _id: string;
 }
 
 interface ICategoryContext {
@@ -28,6 +29,7 @@ export const MyCategoryProvider = ({
 }) => {
   const [myCategory, setMyCategory] = useState<ICategory[]>([]);
   const [size, setSize] = useState<ICategory[]>([]);
+  const [search, setSearch] = useState("");
 
   const getCategoryData = async () => {
     try {

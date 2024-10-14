@@ -10,7 +10,7 @@ interface IProduct {
   name: string;
   description: string;
   price: number;
-  size: string;
+  size: [Schema.Types.ObjectId];
   images: [string];
   isNew: boolean;
   quantity: number;
@@ -33,11 +33,7 @@ const productSchema = new Schema<IProduct>(
       type: String,
       default: "comment",
     },
-    size: {
-      type: String,
-      enum: ["S", "M", "L", "XL", "XXL"],
-      default: "S",
-    },
+    size: [{ type: Schema.Types.ObjectId, ref: "size" }],
     images: {
       type: [String],
       default: ["img"],

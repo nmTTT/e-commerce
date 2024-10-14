@@ -54,6 +54,7 @@ function Header() {
             type="text"
             placeholder="Бүтээгдэхүүн хайх"
             className="bg-primary border-none pr-20 text-white"
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
         <div className="text-white flex items-center">
